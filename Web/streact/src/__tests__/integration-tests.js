@@ -1,10 +1,12 @@
 import React from 'react';
 import Root from '../root';
 import App from '../App';
+import { WrappedTicketList as TicketList } from '../containers/ticket-list';
 import moxios from 'moxios';
 import Enzyme from 'enzyme';
 import {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 
 Enzyme.configure({ adapter: new Adapter() });  // setupTests.js not working
 
@@ -30,7 +32,9 @@ describe('view tickets', ()=> {
     it('should fetch a list of tickets and display the ticket columns for each one', (done)=>{
         const wrapped = mount(
             <Root>
-                <App />
+                <App>
+                    <TicketList />
+                </App>
             </Root>
         );
 
@@ -45,13 +49,14 @@ describe('view tickets', ()=> {
     it('should display a header row with Ticket ID, Description, Edit and Delete columns', (done)=>{
         const wrapped = mount(
             <Root>
-                <App />
+                <App>
+                    <TicketList />
+                </App>
             </Root>
         );
 
         moxios.wait(() => {
             wrapped.update(); 
-
             const rows = wrapped.find('.st-ticketHeader');
             expect(rows.find('th').length).toEqual(3);
             rows.forEach(row => {
@@ -69,7 +74,9 @@ describe('view tickets', ()=> {
     it('should display Edit and Delete buttons, in order, in each row', (done)=>{
         const wrapped = mount(
             <Root>
-                <App />
+                <App>
+                    <TicketList />
+                </App>
             </Root>
         );
 
@@ -77,9 +84,9 @@ describe('view tickets', ()=> {
             wrapped.update(); 
 
             const rows = wrapped.find('.st-ticketRow');
+            expect(rows.length).toBeGreaterThan(0);
             rows.forEach(row => {
                 expect(row.find('button').at(0).render().text()).toEqual('Edit');
-                // expect(row.find('button').at(1).render().text()).toEqual('Delete');
             });
             
             done();

@@ -1,14 +1,5 @@
 import axios from "axios";
-
-// TODO: Move to action-types.js
-export const FETCH_TICKETS = "FETCH_TICKETS";
-export const FETCH_TICKET = "FETCH_TICKET";
-export const CREATE_TICKET = "CREATE_TICKET";
-export const UPDATE_TICKET = "UPDATE_TICKET";
-export const DELETE_TICKET = "DELETE_TICKET";
-export const TICKET_SELECTED = "TICKET_SELECTED";
-export const FETCH_STATIC_DATA = "FETCH_STATIC_DATA";
-export const SET_TICKET = "SET_TICKET";
+import { FETCH_TICKETS, FETCH_TICKET, CREATE_TICKET, DELETE_TICKET, FETCH_STATIC_DATA, SET_TICKET} from './action-types';
 
 const ROOT_URL = process.env.REACT_APP_API_URL;
 
@@ -54,21 +45,19 @@ export function updateTicket(values, callback) {
 
 export function fetchTicket(ticketId) {
   const request = axios.get(`${ROOT_URL}/tickets/${ticketId}`);
-  console.log("Fetch ticket from API");
   return {
-    type: "FETCH_TICKET",
+    type: FETCH_TICKET,
     payload: request
   };
 }
 
 export function deleteTicket(ticketId, callback) {
-  console.log("deleteTicket action");
   const request = axios
   .delete(`${ROOT_URL}/tickets/${ticketId}`)
   .then(() => callback());
 
   return {
-    type: "DELETE_TICKET",
+    type: DELETE_TICKET,
     payload: request
   };
 }
@@ -77,7 +66,7 @@ export function deleteTicket(ticketId, callback) {
 export function setTicket(ticket) {
   console.log("Fetch ticket from cache");
   return {
-    type: "SET_TICKET",
+    type: SET_TICKET,
     payload: ticket
   };
 }

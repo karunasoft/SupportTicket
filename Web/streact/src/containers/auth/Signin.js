@@ -15,7 +15,11 @@ library.add(faExclamation);
 
 export class Signin extends Component {
     onSubmit = formProps => {
+        debugger;
+
         this.props.signin(formProps, () => {
+            console.log("SIGNIN - Pushing /tickets", this.props.history);
+            
             this.props.history.push('/tickets');
         });
       };

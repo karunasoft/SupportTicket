@@ -2,11 +2,10 @@ import _ from "lodash";
 import { 
   FETCH_TICKETS, 
   FETCH_STATIC_DATA, 
-  UPDATE_TICKET, 
   FETCH_TICKET, 
   SET_TICKET,
   DELETE_TICKET
-} from "../actions";
+} from "../actions/action-types";
 
 export default function(state = null, action) {
   let result;
@@ -22,9 +21,6 @@ export default function(state = null, action) {
       return result;
     case DELETE_TICKET:
       result = {...state, ticket: null};
-      return result;
-    case UPDATE_TICKET:
-      result = {...state, updateresult: action.payload.data}; 
       return result;
     case FETCH_STATIC_DATA:
       result = {...state, staticData: action.payload.data};

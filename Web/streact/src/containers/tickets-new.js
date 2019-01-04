@@ -83,7 +83,6 @@ function validate(values) {
     errors.problem = "Provide problem details";
   }
 
-debugger;
   if (!values.severityId) {
     errors.severityId = "Select severity";
   }

@@ -1,2 +1,10 @@
-export const AUTH_USER = 'auth_user';
-export const AUTH_ERROR = 'auth_error';
+export const AUTH_USER = 'AUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
+
+export const FETCH_TICKETS = "FETCH_TICKETS";
+export const FETCH_TICKET = "FETCH_TICKET";
+export const CREATE_TICKET = "CREATE_TICKET";
+export const DELETE_TICKET = "DELETE_TICKET";
+export const TICKET_SELECTED = "TICKET_SELECTED";
+export const FETCH_STATIC_DATA = "FETCH_STATIC_DATA";
+export const SET_TICKET = "SET_TICKET";

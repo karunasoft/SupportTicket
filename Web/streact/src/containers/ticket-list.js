@@ -65,5 +65,5 @@ function mapStateToProps(state) {
   return { tickets: state.tickets.tickets};
 }
 
-
-export default requireAuth(connect(mapStateToProps, { fetchTickets })(TicketList));
+export const WrappedTicketList = connect(mapStateToProps, { fetchTickets })(TicketList);
+export default requireAuth(WrappedTicketList);
