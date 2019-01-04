@@ -1,0 +1,169 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlservice
+spec:
+  type: ExternalName
+  externalName: kssupportticketsql.c7qfid0xqzke.eu-west-1.rds.amazonaws.com
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webservice
+spec:
+  selector:
+    app: stweb
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: streactservice
+spec:
+  selector:
+    app: streact
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+    
+---
+
+apiVersion: v1
+data:
+  SUPPORT_TICKET_DEPLOY_DB_CONN_STRING: "********"
+  SUPPORT_TICKET_DEPLOY_DB_SA_PASSWORD: "********"
+  SUPPORT_TICKET_DEPLOY_DB_CONN_STRING_AUTH: "********"
+  SUPPORT_TICKET_DEPLOY_JWT_SECRET: "********"
+kind: Secret
+metadata:
+  name: mssql
+  namespace: default
+  selfLink: /api/v1/namespaces/default/secrets/mssql
+type: Opaque
+
+---
+
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: slow
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: io1
+  iopsPerGB: "10"
+  fsType: ext4
+  
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mssql-data
+  annotations:
+    storageClassName: slow
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+      
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sql-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sql1
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: sql1
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SUPPORT_TICKET_DEPLOY_DB_SA_PASSWORD 
+        volumeMounts:
+        - name: mssqldb
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: mssqldb
+        persistentVolumeClaim:
+          claimName: mssql-data
+
+--- 
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: streact-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: streact
+    spec:
+      containers:
+      - name: streact
+        image: virasana/streact:2.0.20190103.3
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REACT_APP_API_URL
+          value: http://webapi.ticket-track.com/api
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stweb
+    spec:
+      containers:
+      - name: stweb
+        image: virasana/stwebapi:2.0.20190103.3
+        ports:
+        - containerPort: 80
+        env:
+        - name: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING_AUTH
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING_AUTH
+        - name: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING
+        - name: SUPPORT_TICKET_DEPLOY_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SUPPORT_TICKET_DEPLOY_JWT_SECRET

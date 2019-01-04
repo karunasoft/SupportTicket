@@ -10,7 +10,7 @@ aws ec2 create-security-group --description kssupportticketdb --group-name kssup
 # Get the security group id from the output of the above
 export SECURITY_GROUP_ID=#sg-03bae1f62d6e85fb7#
 
-# Be careful - the followinggrants access to all
+# Be careful - the following grants access to all
 aws ec2 authorize-security-group-ingress --group-id ${SECURITY_GROUP_ID} --protocol tcp --port 1433 --cidr 0.0.0.0/0 --region eu-west-1a
 
 aws rds create-db-instance --db-instance-identifier ${RDS_DATABASE_NAME} --vpc-security-group-ids ${SECURITY_GROUP_ID} /
