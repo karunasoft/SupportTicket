@@ -11,6 +11,7 @@
         "chokidar": "^2.0.4",
         "enzyme": "^3.8.0",
         "enzyme-adapter-react-16": "^1.7.1",
+        "jest-junit": "^5.2.0",
         "lodash": "^4.17.11",
         "moxios": "^0.4.0",
         "react": "^16.7.0",
@@ -28,7 +29,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test  --env=jsdom --verbose",
+        "test": "react-scripts test --env=jsdom --verbose",
+        "test:ci": "react-scripts test  --env=jsdom --verbose --reporters=default --reporters=jest-junit --coverage",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
@@ -39,5 +41,19 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "jest": {
+        "coverageReporters": [
+            "cobertura",
+            "html"
+        ]
+    },
+    "jest-junit": {
+        "suiteName": "jest tests",
+        "output": "test/junit.xml",
+        "classNameTemplate": "{classname} - {title}",
+        "titleTemplate": "{classname} - {title}",
+        "ancestorSeparator": " > ",
+        "usePathForSuiteName": "true"
+    }
 }

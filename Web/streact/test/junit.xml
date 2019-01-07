@@ -1,0 +1,16 @@
+<testsuites name="jest tests" tests="5" failures="0" time="12.252">
+  <testsuite name="\src\actions\__tests__\ticket-actions-tests.js" errors="0" failures="0" skipped="0" timestamp="2019-01-07T16:45:08" time="3.291" tests="2">
+    <testcase classname="fetchTickets - has the correct type" name="fetchTickets - has the correct type" time="0.147">
+    </testcase>
+    <testcase classname="fetchTickets - payload is type of promise" name="fetchTickets - payload is type of promise" time="0.019">
+    </testcase>
+  </testsuite>
+  <testsuite name="\src\__tests__\integration-tests.js" errors="0" failures="0" skipped="0" timestamp="2019-01-07T16:45:08" time="4.781" tests="3">
+    <testcase classname="view tickets - should fetch a list of tickets and display the ticket columns for each one" name="view tickets - should fetch a list of tickets and display the ticket columns for each one" time="0.291">
+    </testcase>
+    <testcase classname="view tickets - should display a header row with Ticket ID, Description, Edit and Delete columns" name="view tickets - should display a header row with Ticket ID, Description, Edit and Delete columns" time="0.197">
+    </testcase>
+    <testcase classname="view tickets - should display Edit and Delete buttons, in order, in each row" name="view tickets - should display Edit and Delete buttons, in order, in each row" time="0.201">
+    </testcase>
+  </testsuite>
+</testsuites>
