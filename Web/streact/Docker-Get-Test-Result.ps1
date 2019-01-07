@@ -4,11 +4,12 @@
 
 Push-Location $PSScriptRoot
 
-$thePath = "$PSScriptRoot/junit.xml"
+$testResultPath = "$PSScriptRoot/junit.xml"
+$coverageResultPath = "$PSScriptRoot/cobertura-coverage.xml"
 
-if(Test-Path -path $thePath)
+if(Test-Path -path $testResultPath)
 {
-    Remove-Item -Force -Path $thePath
+    Remove-Item -Force -Path $testResultPath
 }
 
 # run the image up as a detached container
@@ -20,7 +21,10 @@ $containerId = docker ps -alq | % { $_.Split(" ")[0] }
 Write-Host "Last container id is $containerId"
 
 # Copy the unit test result to host
-&docker cp "$containerId`:/usr/src/app/test/junit.xml" $thePath
+&docker cp "$containerId`:/usr/src/app/test/junit.xml" $testResultPath
+
+# Copy the code coverage result to host
+&docker cp "$containerId`:/usr/src/app/coverage/covertura-coverage.xml" $coverageResultPath
 
 # Stop and remove the container 
 Write-Host -Fore Yellow "Stopping and removing $containerId"
@@ -29,9 +33,9 @@ Write-Host -Fore Yellow "Stopping and removing $containerId"
 Write-Host -Fore Yellow "done!"
 
 
-if(Test-Path -path $thePath)
+if(Test-Path -path $testResultPath)
 {
-    Write-Host -Fore Yellow "Result copied to $thePath"
+    Write-Host -Fore Yellow "Result copied to $testResultPath"
 }
 else
 {
