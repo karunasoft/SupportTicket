@@ -5,7 +5,7 @@
 Push-Location $PSScriptRoot
 
 $testResultPath = "$PSScriptRoot/junit.xml"
-$coverageResultPath = "$PSScriptRoot/cobertura-coverage.xml"
+$coverageFolderPath = "$PSScriptRoot/coverage"
 
 if(Test-Path -path $testResultPath)
 {
@@ -23,8 +23,8 @@ Write-Host "Last container id is $containerId"
 # Copy the unit test result to host
 &docker cp "$containerId`:/usr/src/app/test/junit.xml" $testResultPath
 
-# Copy the code coverage result to host
-&docker cp "$containerId`:/usr/src/app/coverage/covertura-coverage.xml" $coverageResultPath
+# Copy the code coverage directory to host
+&docker cp "$containerId`:/usr/src/app/coverage/" $coverageFolderPath
 
 # Stop and remove the container 
 Write-Host -Fore Yellow "Stopping and removing $containerId"
