@@ -15,7 +15,7 @@ RUN dotnet build ./ST.Web/ST.Web.csproj -c Release -o /app
 
 FROM build AS test
 RUN dotnet tool install -g dotnet-reportgenerator-globaltool
-RUN ./run-tests.sh
+RUN chmod 755 ./run-tests.sh && ./run-tests.sh
 
 FROM build AS publish
 RUN dotnet publish ./ST.Web/ST.Web.csproj -c Release -o /app
