@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
+﻿using System.Collections.Generic;
 using ST.SharedInterfacesLib;
 using ST.SharedUserEntitiesLib;
 
@@ -30,21 +25,14 @@ namespace ST.UserServiceLib
             if (user == null)
                 return null;
 
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            // TODO get secret from environment variable
-            var key = Encoding.ASCII.GetBytes(_jwtSecret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var payload = new Dictionary<string, object>()
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                { "claim1", 0 },
+                { "claim2", "claim2-value" }
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+
+            user.Token = JwtCore.JsonWebToken
+                .Encode(payload, _jwtSecret, JwtCore.JwtHashAlgorithm.HS256);
 
             // remove password before returning
             user.Password = null;
