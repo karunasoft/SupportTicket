@@ -6,8 +6,13 @@ function RunTests {
 	echo "======================================================"
 	
 	printf "=T=T=T=> Running Tests on %s \n" $1
+	
 	dotnet test $1 /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --logger "trx;LogFileName=$1results.trx" --results-directory "/TestResults" -c Release
-	cp $1/coverage.cobertura.xml /TestResults/$1/coverage.cobertura.xml
+	
+	dir = $1
+	dir=${dir%*/}
+	dir=${dir##*/} 
+	cp $1/coverage.cobertura.xml /TestResults/$1/coverage.cobertura.$dir.xml
 	/root/.dotnet/tools/reportgenerator "-reports:/src/$1/coverage.cobertura.xml" "-targetdir:/TestResults/$1/CoverageReport" "-tag:CodeCoverage" "-reportTypes:htmlInline"
 }
 
