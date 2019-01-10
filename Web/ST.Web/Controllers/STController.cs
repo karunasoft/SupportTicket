@@ -109,12 +109,6 @@ namespace ST.Web.Controllers
             return View();
         }
 
-        public ActionResult Search(string searchTerm)
-        {
-            var tickets = _stService.GetActiveTicketsMatching(searchTerm);
-            return View("Index", tickets);
-        }
-
         [HttpPost]
         public ActionResult UpdateStatus(string status)
         {

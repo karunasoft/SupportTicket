@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ST.SharedEntitiesLib;
+using ST.SharedHelpersLib.EntityFramework;
 using ST.SharedInterfacesLib;
 using ST.SharedHelpersLib.Extensions;
 
@@ -10,8 +11,12 @@ namespace ST.SQLServerRepoLib
 {
     public class SQLRepo : ISTRepo
     {
+        private readonly SupportTicketDbContext _context;
         private static string _connectionString;
-
+        public SQLRepo(SupportTicketDbContext context)
+        {
+            _context = context;
+        }
         public void Initialise(string connectionString)
         {
             _connectionString = connectionString;
@@ -89,51 +94,37 @@ namespace ST.SQLServerRepoLib
 
         public ICollection<Ticket> GetActiveTickets()
         {
-            using (var ctx = new SupportTicketDbContext(_connectionString))
-            {
-                var result = ctx.Tickets
-                    .Include("Severity")
-                    .Include("Product")
-                    .Where(t => t.Active)
-                    .ToList();
-                return result;
-            }
+            var result = EfHelpers.Execute(
+                _context,
+                "Could not get active tickets from the database",
+                ctx =>
+                {
+                    var tickets = ctx.Tickets
+                        .Include("Severity")
+                        .Include("Product")
+                        .Where(t => t.Active)
+                        .ToList();
+                    return tickets;
+                });
 
-            //return new List<Tickets>();
+            return result;
         }
 
         private ICollection<Ticket> GetActiveTicketsMatching(List<int> ticketIds)
         {
-            using (var ctx = new SupportTicketDbContext(_connectionString))
-            {
-                var result = ctx.Tickets
-                    .Include("Severity")
-                    .Include("Product")
-                    .Where(t => t.Active && ticketIds.Any(tid => tid == t.TicketId))
-                    .ToList();
-                return result;
-            }
-        }
-
-        public ICollection<Ticket> GetActiveTicketsMatching(string searchTerm)
-        {
-            // TODO: Search by Facet, Add Suggestions to the front end
-            // TODO: Note: you should be using Azure queries to get the keys specific to an index, rather than using the admin key!   
-            //var searchServiceName = "supportticket";
-            //var apiKey = "todo"; // TODO - ConfigurationManager.AppSettings["AzureSearchKey"];
-            //var searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(apiKey));
-            //var indexClient = searchClient.Indexes.GetClient("idxticket");
-            //var sp = new SearchParameters() { SearchMode = SearchMode.All };
-            //var docs = indexClient.Documents.Search<Tickets>(searchTerm, sp).Results;
-
-            var ticketIds = new List<int>();
-
-            //foreach (var searchResult in docs)
-            //{
-            //    ticketIds.Add(searchResult.Document.TicketId);
-            //}
-
-            var result = GetActiveTicketsMatching(ticketIds);
+            var result = EfHelpers.Execute(
+                _context, 
+                $"Could not get active tickets matching ticketIds:{string.Join(',', ticketIds)}",
+                ctx =>
+                {
+                    var tickets = ctx.Tickets
+                        .Include("Severity")
+                        .Include("Product")
+                        .Where(t => t.Active && ticketIds.Any(tid => tid == t.TicketId))
+                        .ToList();
+                    return tickets;
+                }
+            );
 
             return result;
         }

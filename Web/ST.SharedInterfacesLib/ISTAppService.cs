@@ -9,8 +9,6 @@ namespace ST.SharedInterfacesLib
     {
         ICollection<Ticket> GetActiveTickets();
 
-        ICollection<Ticket> GetActiveTicketsMatching(string searchTerm);
-
         ICollection<Severity> GetSeverities();
 
         StaticData GetStaticData();

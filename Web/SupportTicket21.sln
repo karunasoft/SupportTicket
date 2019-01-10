@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST.Web.Tests", "ST.Web.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST.AppServicesLib.Tests", "ST.AppServicesLib.Tests\ST.AppServicesLib.Tests.csproj", "{12BFF184-0DBB-489C-B05A-A681E197A0C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST.SQLServerRepoLib.Tests", "ST.SQLServerRepoLib.Tests\ST.SQLServerRepoLib.Tests.csproj", "{66C83CEB-21B5-4E68-8FD6-3C50967FC517}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{12BFF184-0DBB-489C-B05A-A681E197A0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12BFF184-0DBB-489C-B05A-A681E197A0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12BFF184-0DBB-489C-B05A-A681E197A0C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66C83CEB-21B5-4E68-8FD6-3C50967FC517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C83CEB-21B5-4E68-8FD6-3C50967FC517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C83CEB-21B5-4E68-8FD6-3C50967FC517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C83CEB-21B5-4E68-8FD6-3C50967FC517}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

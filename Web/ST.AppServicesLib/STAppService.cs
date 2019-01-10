@@ -26,12 +26,6 @@ namespace ST.AppServicesLib
             return result;
         }
 
-        public ICollection<Ticket> GetActiveTicketsMatching(string searchTerm)
-        {
-            var result = _appRepo.GetActiveTicketsMatching(searchTerm);
-            return result;
-        }
-
         public ICollection<Severity> GetSeverities()
         {
             var result = _appRepo.GetSeverities();
