@@ -168,22 +168,29 @@ namespace ST.SQLServerRepoLib
 
         public Ticket UpdateTicket(Ticket ticket)
         {
-            using (var ctx = new SupportTicketDbContext(_connectionString))
-            {
-                var result = ctx.Tickets
-                    .First(t => t.TicketId == ticket.TicketId);
+            var result = EfHelpers.Execute(
+                _context,
+                $"Could not update ticket {ticket.TicketId}",
+                ctx =>
+                {
+                    var innerResult = ctx.Tickets
+                        .First(t => t.TicketId == ticket.TicketId);
 
-                result.Active = ticket.Active;
-                result.Description = ticket.Description;
-                result.Problem = ticket.Problem;
-                result.ProductId = ticket.ProductId;
-                result.SeverityId = ticket.SeverityId;
+                    innerResult.Active = ticket.Active;
+                    innerResult.Description = ticket.Description;
+                    innerResult.Problem = ticket.Problem;
+                    innerResult.ProductId = ticket.ProductId;
+                    innerResult.SeverityId = ticket.SeverityId;
 
-                ctx.SaveChanges();
+                    ctx.SaveChanges();
 
-                return result;
-
-            }
+                    // Refetch it from the database (if you want an extra layer of surety)
+                    // a waste of resources though!
+                    // innerResult = ctx.Tickets.FirstOrDefault(t => t.TicketId.Equals(ticket.TicketId));
+                    return innerResult; 
+                }
+            );
+            return result;
         }
 
         public bool DeleteTicket(int ticketId)

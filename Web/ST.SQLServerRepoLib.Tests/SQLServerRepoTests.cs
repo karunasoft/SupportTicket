@@ -48,7 +48,28 @@ namespace ST.SQLServerRepoLib.Tests
                 Assert.IsType<Ticket>(result);
                 result.ShouldDeepEqual(ctx.Tickets.FirstOrDefault());
             }
-            catch (Exception)
+            finally
+            {
+                ctx.Database.EnsureDeleted();
+            }
+        }
+
+        [Fact]
+        public void UpdateTicketUpdatesSuccessfully()
+        {
+            SupportTicketDbContext ctx = GetTestDbContextScenario0();
+            var ticket = ctx.Tickets.First();
+            const string updatedValue = "Problem Updated";
+            
+            try
+            {
+                var repo = new SQLRepo(ctx);
+                ticket.Problem = updatedValue;
+                var result = repo.UpdateTicket(ticket);
+                Assert.IsType<Ticket>(result);
+                result.ShouldDeepEqual(ctx.Tickets.FirstOrDefault());
+            }
+            finally
             {
                 ctx.Database.EnsureDeleted();
             }
