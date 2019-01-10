@@ -12,7 +12,7 @@ function RunTests {
 	dir = $1
 	dir=${dir%*/}
 	dir=${dir##*/} 
-	cp $1/coverage.cobertura.xml /TestResults/$1/coverage.cobertura.$dir.xml
+	cp $1/coverage.cobertura.xml /TestResults/$1/coverage.cobertura.xml
 	/root/.dotnet/tools/reportgenerator "-reports:/src/$1/coverage.cobertura.xml" "-targetdir:/TestResults/$1/CoverageReport" "-tag:CodeCoverage" "-reportTypes:htmlInline"
 }
 
