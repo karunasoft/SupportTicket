@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FakeItEasy" Version="5.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ST.AppServicesLib\ST.AppServicesLib.csproj" />
+    <ProjectReference Include="..\ST.SharedEntitiesLib\ST.SharedEntitiesLib.csproj" />
+    <ProjectReference Include="..\ST.SharedInterfacesLib\ST.SharedInterfacesLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FakeItEasy">
+      <HintPath>C:\Users\Jean-Pierre\.nuget\packages\fakeiteasy\5.0.0-beta.1\lib\netstandard2.0\FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.core">
+      <HintPath>C:\Users\Jean-Pierre\.nuget\packages\xunit.extensibility.core\2.4.0\lib\netstandard2.0\xunit.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
