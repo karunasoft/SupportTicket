@@ -7,7 +7,7 @@ using ST.SharedInterfacesLib;
 namespace ST.Web.Controllers.ApiControllers
 {
     [EnableCors("AllowAnyOrigin")]
-    public class TicketsController : Controller
+    public class TicketsController : ControllerBase
     {
         private readonly ISTAppService<ISTRepo> _stService;
 
@@ -20,9 +20,15 @@ namespace ST.Web.Controllers.ApiControllers
         [Route("api/Tickets")]
         public IActionResult GetTickets()
         {
-            var result = _stService.GetActiveTickets();
-
-            return Ok(result);
+            try
+            {
+                var result = _stService.GetActiveTickets();
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [Route("api/Products")]
