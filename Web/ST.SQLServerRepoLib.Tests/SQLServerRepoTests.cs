@@ -60,7 +60,7 @@ namespace ST.SQLServerRepoLib.Tests
             SupportTicketDbContext ctx = GetTestDbContextScenario0();
             var ticket = ctx.Tickets.First();
             const string updatedValue = "Problem Updated";
-            
+
             try
             {
                 var repo = new SQLRepo(ctx);
@@ -68,6 +68,26 @@ namespace ST.SQLServerRepoLib.Tests
                 var result = repo.UpdateTicket(ticket);
                 Assert.IsType<Ticket>(result);
                 result.ShouldDeepEqual(ctx.Tickets.FirstOrDefault());
+            }
+            finally
+            {
+                ctx.Database.EnsureDeleted();
+            }
+        }
+
+        [Fact]
+        public void AddTicket()
+        {
+            SupportTicketDbContext ctx = GetTestDbContextScenario0();
+            
+            var newTicket = GetNewTicketStubEntity(999);
+
+            try
+            {
+                var repo = new SQLRepo(ctx);
+                var result = repo.AddTicket(newTicket);
+                Assert.IsType<Ticket>(result);
+                result.ShouldDeepEqual(newTicket);
             }
             finally
             {

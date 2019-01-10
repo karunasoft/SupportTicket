@@ -73,23 +73,21 @@ namespace ST.SQLServerRepoLib
 
         public virtual Ticket AddTicket(Ticket ticket)
         {
-            using (var ctx = new SupportTicketDbContext(_connectionString))
-            {
-                ticket.Product = null;
-                ticket.Severity = null;
-                ctx.Tickets.Add(ticket);
+            var result = EfHelpers.Execute(
+                _context, 
+                $"Could not add ticketId: {ticket.TicketId} ",
+                ctx =>
+                {
+                    ticket.Product = null;
+                    ticket.Severity = null;
+                    ctx.Tickets.Add(ticket);
 
-                ctx.SaveChanges();
+                    ctx.SaveChanges();
 
-                var result = ctx.Tickets
-                    .Include("Product")
-                    .Include("Severity")
-                    .FirstOrDefault(t => t.TicketId == ticket.TicketId);
-
-                return result;
-            }
-
-            // return new Tickets();
+                    return ticket;
+                }
+            );
+            return result;
         }
 
         public ICollection<Ticket> GetActiveTickets()
