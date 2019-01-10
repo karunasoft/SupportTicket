@@ -82,41 +82,6 @@ spec:
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: sql-deployment
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: sql1
-    spec:
-      terminationGracePeriodSeconds: 10
-      containers:
-      - name: sql1
-        image: mcr.microsoft.com/mssql/server:2017-latest
-        ports:
-        - containerPort: 1433
-        env:
-        - name: ACCEPT_EULA
-          value: "Y"
-        - name: SA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mssql
-              key: SUPPORT_TICKET_DEPLOY_DB_SA_PASSWORD 
-        volumeMounts:
-        - name: mssqldb
-          mountPath: /var/opt/mssql
-      volumes:
-      - name: mssqldb
-        persistentVolumeClaim:
-          claimName: mssql-data
-
---- 
-
-apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
   name: streact-deployment
 spec:
   replicas: 1
