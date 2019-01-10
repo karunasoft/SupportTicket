@@ -151,14 +151,19 @@ namespace ST.SQLServerRepoLib
 
         public Ticket GetTicket(int ticketId)
         {
-            using (var ctx = new SupportTicketDbContext(_connectionString))
-            {
-                var result = ctx.Tickets
-                    .Include("Severity")
-                    .Include("Product")
-                    .FirstOrDefault(t => t.TicketId.Equals(ticketId));
-                return result;
-            }
+            var result = EfHelpers.Execute(
+                _context,
+                $"Could not GetTicket({ticketId})",
+                ctx =>
+                {
+                    var ticket = ctx.Tickets
+                        .Include("Severity")
+                        .Include("Product")
+                        .FirstOrDefault(t => t.TicketId.Equals(ticketId));
+                    return ticket;
+                }
+            );
+            return result;
         }
 
         public Ticket UpdateTicket(Ticket ticket)
