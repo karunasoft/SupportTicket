@@ -29,7 +29,7 @@ The application demonstrates full DevOps automation from end to end, allowing yo
 The application supports storing security information in a separate database from the application data.  (Two connection strings)
 
 ## Versioning
-The deployed version appears at the foot of each of the pages of the application e.g. **Docker: virasana/streact:2.0.20190103.3**
+The deployed version appears at the foot of each of the pages of the application e.g. **Docker: virasana/streact:2.0.20190103.3**  This makes it easy for developers to identify the source build (and code) of any issues in production.
 
 ## Technologies and architecture
 It is a React front end, with a .Net Core REST API. There is also a legacy .Net Core front end. 
