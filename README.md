@@ -2,7 +2,9 @@ SupportTicket
 =============
 
 
-This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).  
+This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)). 
+
+My general DevOps picture can be viewed in the first part of a presentation I delivered in the context of Azure Service Fabric: [Deployment for Devops](https://www.slideshare.net/jeanpierrefouche/deployment-for-dev-ops-with-service-fabric-127250670).
 
 ## Running Deployments
 
@@ -56,10 +58,10 @@ Build once on a build server.  This produces a set of build artifacts, sometimes
 Also known as "rolling upgrades".  You should be able to roll out a new version of the application withouth having to pull down the system!  Kubernetes is the winner here!  The database changes need to be carefully thought-through, and you will need to be able to support at least two schemas at the same time, as you roll a new version.
 
 ### Ability to deploy "n" number of environments 
-With the container-based kubernetes orchestration in place, it is well possible to provision new environments in the cloud.  Self service for developers is becoming a reality.
+With the container-based kubernetes orchestration in place, it is well possible to provision any number of new environments in the cloud. 
 
 
-See the whole presentation (in the context of Azure Service Fabric) [Deployment for Devops](https://www.slideshare.net/jeanpierrefouche/deployment-for-dev-ops-with-service-fabric-127250670).
+
 
 
 
