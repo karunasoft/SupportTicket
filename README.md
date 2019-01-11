@@ -4,7 +4,8 @@ SupportTicket
 
 This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)). 
 
-My general DevOps picture can be viewed in the first part of a presentation I delivered in the context of Azure Service Fabric: [Deployment for Devops](https://www.slideshare.net/jeanpierrefouche/deployment-for-dev-ops-with-service-fabric-127250670).
+My general DevOps picture can be viewed in the first part of a presentation I delivered (in the context of Azure Service Fabric): [Deployment for Devops](https://www.slideshare.net/jeanpierrefouche/deployment-for-dev-ops-with-service-fabric-127250670).
+See particularly the concept of ["Systems as Code"](https://www.slideshare.net/jeanpierrefouche/clipboards/systems-as-code-a-model-for-devops-automation)
 
 ## Running Deployments
 
