@@ -26,6 +26,8 @@ You need to register, and sign in order to capture tickets.  The authentication 
 ## Kubernetes
 The application demonstrates full DevOps automation from end to end, allowing you to deploy to multiple Kubernetes cloud hosts (AWS and Azure AKS are supported).
 
+The application supports storing security information in a separate database from the application data.  (Two connection strings)
+
 ## Versioning
 The deployed version appears at the foot of each of the pages of the application e.g. **Docker: virasana/streact:2.0.20190103.3**
 
