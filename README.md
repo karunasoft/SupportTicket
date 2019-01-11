@@ -43,7 +43,7 @@ responsive design supports mobile phone displays - see the React hamburger menu 
 
 ## Devops Practices
 ### Configuration as Code
-The application is automated from top to bottom (I term this "Systems As Code" - see [here](https://www.slideshare.net/virasana/clipboards/systems-as-code-a-model-for-devops-automation?rftp=success_toast)).  
+The application is automated from top to bottom (I term this "Systems As Code" - see [here](https://www.slideshare.net/jeanpierrefouche/clipboards/systems-as-code-a-model-for-devops-automation)).  
 
 ### Build Once, Deploy Many
 Build once on a build server.  This produces a set of build artifacts, sometimes called the "Drop".   You can then take this "Drop", configure it, and deploy it to all of your environments.  You should not need to rebuild the application in order to reconfigure it, and nor should you tinker with a build package after it has been built.  Configuration is "orthogonal" to the build.  Always build and test the same artifact - don't rebuild to push the code to QA!
@@ -59,7 +59,7 @@ Also known as "rolling upgrades".  You should be able to roll out a new version 
 With the container-based kubernetes orchestration in place, it is well possible to provision new environments in the cloud.  Self service for developers is becoming a reality.
 
 
-See the whole presentation (in the context of Azure Service Fabric) [Deployment for Devops](https://www.slideshare.net/virasana/deployment-for-dev-ops-with-service-fabric-127250670).
+See the whole presentation (in the context of Azure Service Fabric) [Deployment for Devops](https://www.slideshare.net/jeanpierrefouche/deployment-for-dev-ops-with-service-fabric-127250670).
 
 
 
