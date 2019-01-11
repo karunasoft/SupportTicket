@@ -41,8 +41,8 @@ All dev and test is done using the Microsoft Linux SQL Server image.  (Container
 
 Production uses a managed SQL Server database, hosted on AWS using their Relational Database Service (RDS).
 
-## Mobile Phones
-responsive design supports mobile phone displays - see the React hamburger menu (tested on my Android).  
+## Responsive Design
+Responsive design supports mobile phone displays - see the React hamburger menu (tested on my Android).  
 
 ## Devops Practices
 ### Configuration as Code
