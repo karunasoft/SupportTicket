@@ -46,6 +46,9 @@ Production uses a managed SQL Server database, hosted on AWS using their Relatio
 ## Responsive Design
 Responsive design supports mobile phone displays - see the React hamburger menu (tested on my Android).  
 
+## Testing 
+One of the challenges of testing has been to run the tests on the production environment (i.e. the container).  When it comes to the build server, we want to run the tests that were build from the new source, on the container.  This project demonstrates how to run the test on the container, and to extract the results back to the host, for publication to VSTS/Azure Devops Services.
+
 ## Devops Practices
 ### Configuration as Code
 The application is automated from top to bottom (I term this "Systems As Code" - see [here](https://www.slideshare.net/jeanpierrefouche/clipboards/systems-as-code-a-model-for-devops-automation)).  
