@@ -8,6 +8,8 @@ My general DevOps picture can be viewed in the first part of a presentation I de
 See particularly my concept of ["Systems as Code"](https://www.slideshare.net/jeanpierrefouche/clipboards/systems-as-code-a-model-for-devops-automation)
 
 ## Running Deployments
+User Name: demo
+Password: demodemodemo
 
 ### AWS
 * http://react.ticket-track.com
