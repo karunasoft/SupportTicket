@@ -9,7 +9,6 @@ See particularly my concept of ["Systems as Code"](https://www.slideshare.net/je
 
 ## Running Deployments
 User Name: demo
-
 Password: demodemodemo
 
 ### AWS
