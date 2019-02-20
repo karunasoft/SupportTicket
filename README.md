@@ -2,7 +2,7 @@ SupportTicket
 =============
 
 
-This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)) and [Systems as Code](https://jeanpierrefouche.wordpress.com/2019/01/29/systems-as-code/).  This project uses React, .Net Core, VSTS and Kubernetes, and runs on AWS and Azure.  Please contact me for a hands-on demonstration of the end-to-end pipeline.
+This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)) and [Systems as Code](https://jeanpierrefouche.wordpress.com/2019/01/29/systems-as-code/).  This project uses React, .Net Core, VSTS and Kubernetes, and runs on AWS and Azure.  Please contact me for a hands-on demonstration of the end-to-end pipeline. <a href="https://jeanpierrefouche.wordpress.com/2019/01/29/systems-as-code/" target="_new">Systems as Code</a>
 
 My general DevOps picture can be viewed in the first part of a presentation I delivered (in the context of Azure Service Fabric): [Deployment for Devops](https://www.slideshare.net/jeanpierrefouche/deployment-for-dev-ops-with-service-fabric-127250670).
 See particularly my concept of ["Systems as Code"](https://www.slideshare.net/jeanpierrefouche/clipboards/systems-as-code-a-model-for-devops-automation)
