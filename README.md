@@ -7,14 +7,12 @@ This is a project to demonstrate some of the technologies that I am working on, 
 My general DevOps picture can be viewed in the first part of a presentation I delivered (in the context of Azure Service Fabric): [Deployment for Devops](https://www.slideshare.net/jeanpierrefouche/deployment-for-dev-ops-with-service-fabric-127250670).
 See particularly my concept of ["Systems as Code"](https://www.slideshare.net/jeanpierrefouche/clipboards/systems-as-code-a-model-for-devops-automation)
 
-## Running Deployments
+## Running Deployment
+
+Note: the codebase supports deploying to AWS, but I support only one deployment in order to keep costs down.
 
 * **User Name:** demo
 * **Password:** demodemodemo
-
-### AWS
-* http://react.ticket-track.com
-* http://webapi.ticket-track.com
 
 ### Azure
 * http://dev.react.ticket-track.com
