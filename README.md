@@ -18,6 +18,9 @@ Note: the codebase supports deploying to AWS, but I support only one deployment 
 * http://dev.react.ticket-track.com
 * http://dev.webapi.ticket-track.com
 
+### AWS 
+* Not currently deployed (see codebase for all the stuff!)
+
 ## Overview
 Support Ticket is a simple application which allows you to capture support tickets into a database. You can add, view and edit tickets. 
 
